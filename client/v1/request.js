@@ -317,8 +317,10 @@ Request.prototype.errorMiddleware = function (response) {
         throw new Exceptions.ActionSpamError(json);
     if (json.message == 'checkpoint_required')
         throw new Exceptions.CheckpointError(json, this.session);
-    if (json.message == 'login_required')
+    if (json.message == 'login_required'){
+        if(json.logout_reason && json.logout_reason===2) throw new Exceptions.AccountBanned('Account banned during request');
         throw new Exceptions.AuthenticationError("Login required to process this request");
+    }
     if (response.statusCode===429 || _.isString(json.message) && json.message.toLowerCase().indexOf('too many requests') !== -1)
         throw new Exceptions.RequestsLimitError();
     if (_.isString(json.message) && json.message.toLowerCase().indexOf('not authorized to view user') !== -1) 
