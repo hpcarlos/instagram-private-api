@@ -12,5 +12,15 @@ function CookieRedisStorage(id, options) {
     CookieStorage.call(this, new RedisCookieStore(id,options));
 }
 
+CookieRedisStorage.prototype.destroy = function () {
+    var self = this;
+    return new Promise(function(resolve, reject) {
+        self.storage.removeCookies(CONSTANTS.HOSTNAME,null,function(err){
+            if (err) return reject(err);
+            resolve();
+        })
+    });
+}
+
 util.inherits(CookieRedisStorage, CookieStorage);
 module.exports = CookieRedisStorage;
