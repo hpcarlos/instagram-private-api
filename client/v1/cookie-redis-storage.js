@@ -1,4 +1,5 @@
 var util = require("util");
+var CONSTANTS = require("./constants");
 
 var RedisCookieStore = require('redis-cookie-monster');
 var CookieStorage = require('./cookie-storage');
@@ -20,7 +21,7 @@ CookieRedisStorage.prototype.destroy = function () {
             resolve();
         })
     });
-}
+};
 
 util.inherits(CookieRedisStorage, CookieStorage);
 module.exports = CookieRedisStorage;
