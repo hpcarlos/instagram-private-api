@@ -90,5 +90,11 @@ CookieStorage.prototype.removeCheckpointStep = function () {
 
 
 CookieStorage.prototype.destroy = function () {
-    throw new Error("Mehtod destroy is not implemented")
+    var self = this;
+    return new Promise(function(resolve, reject) {
+        self.storage.removeCookies(CONSTANTS.HOSTNAME, function(err){
+            if (err) return reject(err);
+            resolve();
+        })
+    });
 }
