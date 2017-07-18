@@ -61,6 +61,7 @@ Challenge.resolve = function(checkpointError,defaultMethod){
         try{
             var json = JSON.parse(response.body);
         }catch(e){
+            console.error(JSON.stringify(response.body))
             throw new TypeError('Invalid response. JSON expected');
         }
         //Using html unlock if native is not supported
@@ -128,6 +129,7 @@ Challenge.resolveHtml = function(checkpointError,defaultMethod){
                 challenge = json.entry_data.Challenge[0];
             }
         }catch(e){
+            console.error(JSON.stringify(response.body))
             throw new TypeError('Invalid response. JSON expected');
         }
         if(defaultMethod=='email'){
@@ -209,6 +211,7 @@ Challenge.prototype.code = function(code){
             try{
                 var json = JSON.parse(response.body);
             }catch(e){
+                console.error(JSON.stringify(response.body))
                 throw new TypeError('Invalid response. JSON expected');
             }
             if(response.statusCode == 200 && json.status==='ok' && (json.action==='close' || json.location==='instagram://checkpoint/dismiss')) return true;
@@ -267,6 +270,7 @@ PhoneVerificationChallenge.prototype.phone = function(phone){
             try{
                 var json = JSON.parse(response.body);
             }catch(e){
+                console.error(JSON.stringify(response.body))
                 throw new TypeError('Invalid response. JSON expected');
             }
             return new PhoneVerificationChallenge(that.session, 'phone', that.error, json);
