@@ -23,5 +23,9 @@ CookieRedisStorage.prototype.destroy = function () {
     });
 };
 
+CookieRedisStorage.prototype.getAllCookies = function () {
+    return JSON.stringify(this.storage.idx)
+};
+
 util.inherits(CookieRedisStorage, CookieStorage);
 module.exports = CookieRedisStorage;
