@@ -51,6 +51,9 @@ CookieStorage.prototype.getCookies = function () {
     });
 };
 
+CookieStorage.prototype.getAllCookies = function () {
+    throw new Error("Mehtod getAllCookies is not implemented")
+};
 
 CookieStorage.prototype.getAccountId = function () {
     var self = this;
